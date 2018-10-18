@@ -60,7 +60,16 @@ class User extends Authenticatable
       return $this->papeis()->attach($papel);
     }
 
-    public function existePapel($papel)
+    public function removePapel($papel)
+    {
+      if (is_string($papel)) {
+        $papel = Papel::where('nome', '=', $papel)->get();
+      }
+
+      return $this->papeis()->detach($papel);
+    }
+
+    private function existePapel($papel)
     {
       if (is_string($papel)) {
         $papel = Papel::where('nome', '=', $papel)->firstOrFail();

@@ -49,7 +49,11 @@ class UsuarioController extends Controller
 
     public function papelDestroy($id, $papel_id)
     {
+        $usuario = User::find($id);
+        $papel = Papel::find($papel_id);
 
+        $usuario->removePapel($papel);
+        return redirect()->back();
     }
 
     /**

@@ -53,7 +53,7 @@
               <p>Listar papéis do sistema</p>
             </div>
             <div class="card-action">
-              <a href="#">Visualizar</a>
+              <a href="{{route('papeis.index')}}">Visualizar</a>
             </div>
           </div>
         </div>
