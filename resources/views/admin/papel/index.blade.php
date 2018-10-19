@@ -27,7 +27,7 @@
 
 							<form action="{{route('papeis.destroy',$registro->id)}}" method="post">
 								<a title="Editar" class="btn orange" href="{{ route('papeis.edit',$registro->id) }}"><i class="material-icons">mode_edit</i></a>
-								<a title="Permissões" class="btn blue" href="#"><i class="material-icons">lock_outline</i></a>
+								<a title="Permissões" class="btn blue" href="{{ route('papeis.permissao', $registro->id) }}"><i class="material-icons">lock_outline</i></a>
 
 
 									{{ method_field('DELETE') }}

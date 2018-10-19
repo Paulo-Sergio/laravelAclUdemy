@@ -18,4 +18,35 @@ class Papel extends Model
     {
       return $this->belongsToMany(Permissao::class);
     }
+
+    public function adicionaPermissao($permissao)
+    {
+      if (is_string($permissao)) {
+        $permissao = Permissao::where('nome', '=', $permissao)->get();
+      }
+
+      if ($this->existePermissao($permissao)) {
+        return;
+      }
+
+      return $this->permissoes()->attach($permissao);
+    }
+
+    public function removePermissao($permissao)
+    {
+      if (is_string($permissao)) {
+        $permissao = Permissao::where('nome', '=', $permissao)->get();
+      }
+
+      return $this->permissoes()->detach($permissao);
+    }
+
+    private function existePermissao($permissao)
+    {
+      if (is_string($permissao)) {
+        $permissao = Permissao::where('nome', '=', $permissao)->firstOrFail();
+      }
+
+      return (boolean) $this->permissoes()->find($permissao->id);
+    }
 }

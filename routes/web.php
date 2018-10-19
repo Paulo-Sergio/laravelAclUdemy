@@ -205,4 +205,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
   Route::delete('usuarios/papel/{usuario}/{papel}', ['as' => 'usuarios.papel.destroy', 'uses' => 'Admin\UsuarioController@papelDestroy']);
 
   Route::resource('papeis', 'Admin\PapelController');
+  Route::get('papeis/permissao/{id}', ['as' => 'papeis.permissao', 'uses' => 'Admin\PapelController@permissao']);
+  Route::post('papeis/permissao/{permissao}', ['as' => 'papeis.permissao.store', 'uses' => 'Admin\PapelController@permissaoStore']);
+  Route::delete('papeis/permissao/{papel}/{permissao}', ['as' => 'papeis.permissao.destroy', 'uses' => 'Admin\PapelController@permissaoDestroy']);
+
 });
