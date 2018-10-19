@@ -44,6 +44,6 @@ class AuthServiceProvider extends ServiceProvider
 
     public function listaPermissoes()
     {
-        return Permissao::with('papeis');
+        return Permissao::with('papeis')->get();
     }
 }

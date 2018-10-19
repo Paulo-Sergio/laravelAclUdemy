@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Papel;
 
+use Illuminate\Support\Facades\Gate;
+
 class UsuarioController extends Controller
 {
     /**
@@ -16,6 +18,10 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('usuario-view')) {
+            abort(403,"Não autorizado!");
+        }
+
         $usuarios = User::all();
         $caminhos = [
             ['url'=>'/admin','titulo'=>'Admin'],
@@ -26,6 +32,10 @@ class UsuarioController extends Controller
 
     public function papel($id)
     {
+        if (Gate::denies('usuario-edit')) {
+            abort(403,"Não autorizado!");
+        }
+        
         $usuario = User::find($id);
         $papel = Papel::all();
         $caminhos = [
@@ -39,6 +49,10 @@ class UsuarioController extends Controller
 
     public function papelStore(Request $request, $id)
     {
+        if (Gate::denies('usuario-edit')) {
+            abort(403,"Não autorizado!");
+        }
+
         $usuario = User::find($id);
         $dados = $request->all();
         $papel = Papel::find($dados['papel_id']);
@@ -49,6 +63,10 @@ class UsuarioController extends Controller
 
     public function papelDestroy($id, $papel_id)
     {
+        if (Gate::denies('usuario-edit')) {
+            abort(403,"Não autorizado!");
+        }
+
         $usuario = User::find($id);
         $papel = Papel::find($papel_id);
 
@@ -63,7 +81,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        if (Gate::denies('usuario-create')) {
+            abort(403,"Não autorizado!");
+        }
     }
 
     /**
@@ -74,7 +94,9 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Gate::denies('usuario-create')) {
+            abort(403,"Não autorizado!");
+        }
     }
 
     /**
@@ -96,7 +118,9 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Gate::denies('usuario-edit')) {
+            abort(403,"Não autorizado!");
+        }
     }
 
     /**
@@ -108,7 +132,9 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (Gate::denies('usuario-edit')) {
+            abort(403,"Não autorizado!");
+        }
     }
 
     /**
@@ -119,6 +145,8 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Gate::denies('usuario-delete')) {
+            abort(403,"Não autorizado!");
+        }
     }
 }
