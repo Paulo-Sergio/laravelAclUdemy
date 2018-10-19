@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Chamado;
+use App\Permissao;
+use App\User;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -32,7 +34,16 @@ class AuthServiceProvider extends ServiceProvider
         });
         */
 
+        foreach($this->listaPermissoes() as $permissao) {
+            Gate::define($permissao->nome, function(User $user) use($permissao) {
+                return $user->temUmPapelDestes($permissao->papeis) || $user->eAdmin();
+            });
+        }
 
+    }
 
+    public function listaPermissoes()
+    {
+        return Permissao::with('papeis');
     }
 }

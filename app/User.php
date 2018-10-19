@@ -29,7 +29,8 @@ class User extends Authenticatable
 
     public function eAdmin()
     {
-      return $this->id == 1;
+      // return $this->id == 1;
+      return $this->existePapel('Admin');
     }
 
     public function carros()
@@ -76,5 +77,13 @@ class User extends Authenticatable
       }
 
       return (boolean) $this->papeis()->find($papel->id);
+    }
+
+    public function temUmPapelDestes($papeis)
+    {
+      $userPapeis = $this->papeis;
+
+      // compara a lista de papeis do parametro, com os papeis do User
+      return $papeis->intersect($userPapeis)->count();
     }
 }
