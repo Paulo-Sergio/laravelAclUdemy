@@ -8,7 +8,7 @@
           <li><a href="{{ url('/login') }}">Entrar</a></li>
           <li><a href="{{ url('/register') }}">Cadastro</a></li>
       @else
-        <li><a href="#">{{ Auth::user()->name }}</a></li></li>
+        <li><a href="/admin">{{ Auth::user()->name }}</a></li></li>
         <li>
             <a href="{{ url('/logout') }}"
                 onclick="event.preventDefault();
